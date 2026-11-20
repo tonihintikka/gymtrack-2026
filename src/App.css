@@ -1,0 +1,266 @@
+/* Mobile-first styles */
+
+:root {
+  --primary-color: #3f51b5;
+  --primary-dark: #303f9f;
+  --primary-light: #c5cae9;
+  --accent-color: #ff4081;
+  --text-color: #212121;
+  --text-secondary: #757575;
+  --divider-color: #bdbdbd;
+  --background-color: #f5f5f5;
+  --card-color: #ffffff;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --content-width: 100%;
+  --max-content-width: 600px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  line-height: 1.5;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.app-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: calc(0.25rem + env(safe-area-inset-top)) 1rem 0.25rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 52px;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.app-header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.app-header .app-logo {
+  height: 32px;
+  width: 32px;
+  margin-right: 0.5rem;
+}
+
+.app-header .header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.app-content {
+  flex: 1;
+  padding: 0.75rem;
+  overflow-y: auto;
+  margin-top: 52px; /* Equal to header height */
+  margin-bottom: calc(56px + env(safe-area-inset-bottom)); /* Account for nav + safe area */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* Common container for all feature screens */
+.feature-container {
+  width: var(--content-width);
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* Ensure all direct children of feature-container take full width */
+.feature-container > * {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Common content containers */
+.exercise-screen,
+.program-screen,
+.workout-screen,
+.history-screen {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.app-nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--card-color);
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(56px + env(safe-area-inset-bottom));
+  width: 100%;
+  z-index: 10;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.app-nav button {
+  flex: 1;
+  padding: 0.25rem 0;
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 56px; /* ensure 44+ tap target */
+}
+
+.app-nav button.active {
+  color: var(--primary-color);
+  border-top: 2px solid var(--primary-color);
+  font-weight: 500;
+  background-color: rgba(63, 81, 181, 0.05);
+}
+
+.app-nav .nav-icon { font-size: 1.25rem; line-height: 1; }
+.app-nav .nav-label { font-size: 0.75rem; }
+
+/* SVG nav icons inherit currentColor */
+.app-nav .nav-icon svg { width: 22px; height: 22px; display: block; }
+
+.app-nav button:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+/* Card styles */
+.card {
+  background-color: var(--card-color);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+/* Form styles */
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--divider-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  /* Safari and mobile fixes */
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #ffffff;
+  color: var(--text-color);
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* Safari and mobile fixes */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.4);
+}
+
+/* Remove focus outline for non-keyboard navigation */
+button:active:focus {
+  box-shadow: none;
+}
+
+button.secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+button.secondary:hover {
+  background-color: var(--primary-light);
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .app-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .app-header, 
+  .app-nav {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Workout Summary */
+.workout-summary {
+  padding: 1.5rem;
+}
+
+.no-sets-message {
+  padding: 0.5rem;
+  font-style: italic;
+  color: #666;
+  border-left: 3px solid #ddd;
+  margin: 0.5rem 0;
+}

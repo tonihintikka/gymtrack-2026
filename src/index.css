@@ -1,0 +1,256 @@
+:root {
+  --font-family-base: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.12);
+
+  --z-header: 100;
+  --z-nav: 200;
+  --z-overlay: 300;
+
+  --app-header-height: 4rem;
+  --app-nav-height: 4.5rem;
+  --app-content-max-width: 72rem;
+  --app-content-padding: var(--space-4);
+
+  --color-scheme: light;
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8fafc;
+  --color-text: #213547;
+  --color-text-muted: #5c6b7a;
+  --color-border: #e2e8f0;
+  --color-accent: #646cff;
+  --color-accent-hover: #535bf2;
+  --color-focus: #2563eb;
+  --color-nav-bg: #ffffff;
+  --color-nav-active: #646cff;
+  --color-header-bg: #ffffff;
+
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-base);
+  font-weight: 400;
+
+  /* Keep the current light theme active. Dark aliases are prepared below but
+     are only applied when an explicit data-theme is present. */
+  color-scheme: var(--color-scheme);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme="dark"] {
+  --color-scheme: dark;
+  --color-bg: #0f172a;
+  --color-surface: #111827;
+  --color-surface-muted: #1f2937;
+  --color-text: #e5e7eb;
+  --color-text-muted: #9ca3af;
+  --color-border: #374151;
+  --color-accent: #818cf8;
+  --color-accent-hover: #a5b4fc;
+  --color-focus: #93c5fd;
+  --color-nav-bg: #111827;
+  --color-nav-active: #818cf8;
+  --color-header-bg: #111827;
+}
+
+a {
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+}
+
+/* Let App.css control button styles */
+button { all: unset; }
+button { display: inline-block; }
+
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Shared shell layout */
+#root .app-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: var(--app-header-height);
+  padding-bottom: calc(var(--app-nav-height) + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+#root .app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  height: var(--app-header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 0 var(--app-content-padding);
+  box-sizing: border-box;
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+#root .app-header h1 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+}
+
+#root .app-logo {
+  width: 2rem;
+  height: 2rem;
+}
+
+#root .app-content {
+  width: 100%;
+  max-width: var(--app-content-max-width);
+  margin: 0 auto;
+  padding: var(--app-content-padding);
+  padding-bottom: calc(var(--app-nav-height) + var(--space-4) + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+  min-height: calc(100dvh - var(--app-header-height) - var(--app-nav-height));
+}
+
+#root .app-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-nav);
+  height: calc(var(--app-nav-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  gap: var(--space-1);
+  box-sizing: border-box;
+  background-color: var(--color-nav-bg);
+  border-top: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+#root .app-nav button {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: var(--app-nav-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-tight);
+  cursor: pointer;
+}
+
+#root .app-nav button.active {
+  color: var(--color-nav-active);
+  font-weight: 600;
+}
+
+#root .app-nav .nav-icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+}
+
+#root .app-nav .nav-label {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Shared section heading */
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-4);
+}
+
+.section-header__text {
+  min-width: 0;
+}
+
+.section-header__title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+}
+
+.section-header__description {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.section-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
