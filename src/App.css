@@ -128,6 +128,13 @@ body {
   width: 100%;
   z-index: 10;
   padding-bottom: env(safe-area-inset-bottom);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.app-nav--hidden {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .app-nav button {
