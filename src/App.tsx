@@ -71,6 +71,7 @@ function getInitialTab(): TabId {
 function App() {
   const [initialized, setInitialized] = useState(false)
   const [activeTab, setActiveTab] = useState<TabId>(getInitialTab)
+  const [hideNav, setHideNav] = useState(false)
   const workout = useWorkout()
 
   // Initialize the database on mount
@@ -109,6 +110,35 @@ function App() {
 
     return () => {
       window.removeEventListener('hashchange', syncFromHash)
+    }
+  }, [])
+
+  // Hide bottom nav when an input/textarea is focused (especially useful on iOS
+  // where the keyboard accessory bar + fixed nav can cover the logging UI).
+  useEffect(() => {
+    const onFocusIn = (e: FocusEvent) => {
+      const target = e.target as HTMLElement | null
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) {
+        setHideNav(true)
+      }
+    }
+
+    const onFocusOut = () => {
+      // Small delay so focus can move between inputs without flickering
+      setTimeout(() => {
+        const active = document.activeElement as HTMLElement | null
+        if (!active || (active.tagName !== 'INPUT' && active.tagName !== 'TEXTAREA')) {
+          setHideNav(false)
+        }
+      }, 50)
+    }
+
+    document.addEventListener('focusin', onFocusIn)
+    document.addEventListener('focusout', onFocusOut)
+
+    return () => {
+      document.removeEventListener('focusin', onFocusIn)
+      document.removeEventListener('focusout', onFocusOut)
     }
   }, [])
 
@@ -164,7 +194,11 @@ function App() {
           <ActiveScreen />
         </main>
 
-        <nav className="app-nav" aria-label="Bottom navigation">
+        <nav
+          className={`app-nav${hideNav ? ' app-nav--hidden' : ''}`}
+          aria-label="Bottom navigation"
+          aria-hidden={hideNav}
+        >
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id
 
