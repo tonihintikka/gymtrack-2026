@@ -9,6 +9,22 @@ Notes
 
 ## Milestone 1 — Faster Set Logging (Highest impact)
 
+### [x] M1.0 Scroll logged sets into view after logging
+Goal: Ensure the newly logged set stays visible above the fixed bottom navigation.
+- After logging a set, scroll the `.logged-sets-list` into view with `scrollIntoView`.
+- Handles intermittent overlap caused by keyboard, safe areas, and growing content.
+
+Acceptance
+- Newly logged set remains visible above the bottom nav on mobile.
+- Works with keyboard open and varying numbers of sets.
+
+Files
+- `src/features/workout/components/SetInputForm.tsx`
+
+See: [docs/tech-notes/scroll-after-log-set.md](./tech-notes/scroll-after-log-set.md)
+
+---
+
 ### [ ] M1.1 Numeric keypad + input hints
 Goal: Show the correct mobile keyboard and speed up IME flow.
 - Add `inputMode="decimal"` to Weight, `inputMode="numeric"` to Reps.
