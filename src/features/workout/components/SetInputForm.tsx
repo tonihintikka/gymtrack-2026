@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ProgramExercise } from '../../../types/models';
 
 interface SetInputFormProps {
@@ -15,6 +15,31 @@ export const SetInputForm = ({
   const [isFailure, setIsFailure] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isSlowEccentric, setIsSlowEccentric] = useState(false);
+  const [shouldScroll, setShouldScroll] = useState(false);
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Scroll the logged sets list into view after a set is logged
+  // so it stays visible above the fixed bottom navigation.
+  useEffect(() => {
+    if (shouldScroll && formRef.current) {
+      const timeout = setTimeout(() => {
+        const loggedSets = formRef.current
+          ?.closest('.exercise-view')
+          ?.querySelector('.logged-sets-list');
+
+        if (loggedSets) {
+          loggedSets.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+          });
+        }
+      }, 50);
+
+      setShouldScroll(false);
+      return () => clearTimeout(timeout);
+    }
+  }, [shouldScroll]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,10 +58,13 @@ export const SetInputForm = ({
     setIsFailure(false);
     setIsPaused(false);
     setIsSlowEccentric(false);
+
+    // Trigger scroll to the logged sets
+    setShouldScroll(true);
   };
 
   return (
-    <form className="set-input-form" onSubmit={handleSubmit}>
+    <form className="set-input-form" onSubmit={handleSubmit} ref={formRef}>
       <div className="set-input-row">
         <div className="form-group">
           <label htmlFor="weight">Weight</label>
