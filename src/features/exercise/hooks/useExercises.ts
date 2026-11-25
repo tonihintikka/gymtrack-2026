@@ -50,6 +50,7 @@ import { STORES } from '../../../services/db';
       { id: 'smith-shoulder-press', name: 'Smith Shoulder Press', isCustom: false, muscleGroup: 'Shoulders', category: 'Push', side: 'Front', baseExercise: 'Overhead Press' },
       { id: 'face-pull', name: 'Face Pull', isCustom: false, muscleGroup: 'Shoulders', category: 'Pull', side: 'Back', baseExercise: 'Face Pull' },
       { id: 'cable-face-pull', name: 'Cable Face Pull', isCustom: false, muscleGroup: 'Shoulders', category: 'Pull', side: 'Back', baseExercise: 'Face Pull' },
+      { id: 'machine-face-pull', name: 'Machine Face Pull / Seated Rear Delt', isCustom: false, muscleGroup: 'Shoulders', category: 'Pull', side: 'Back', baseExercise: 'Face Pull' },
       { id: 'incline-dumbbell-press', name: 'Incline Dumbbell Press', isCustom: false, muscleGroup: 'Chest', category: 'Push', side: 'Front', baseExercise: 'Incline Dumbbell Press' },
 
       // Biceps
