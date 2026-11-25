@@ -13,28 +13,42 @@ const builtInPrograms: Program[] = [
     id: 'three-day-split',
     name: '3-Day Training Split',
     description: 'A balanced 3-day workout split targeting all major muscle groups with compound and isolation exercises.',
-    exercises: [
-      // Workout 1
-      { exerciseId: 'squat', targetSets: 4, targetReps: '8-10', notes: 'Workout 1' },
-      { exerciseId: 'bench-press', targetSets: 4, targetReps: '5-8', notes: 'Workout 1' },
-      { exerciseId: 'pull-ups', targetSets: 4, targetReps: 'max', notes: 'Workout 1' },
-      { exerciseId: 'tricep-pushdown', targetSets: 3, targetReps: '10-12', notes: 'Workout 1' },
-      { exerciseId: 'crunches', targetSets: 3, targetReps: '10-15', notes: 'Workout 1' },
-      
-      // Workout 2
-      { exerciseId: 'deadlift', targetSets: 4, targetReps: '5-8', notes: 'Workout 2' },
-      { exerciseId: 'overhead-press', targetSets: 4, targetReps: '8-10', notes: 'Workout 2' },
-      { exerciseId: 'barbell-row', targetSets: 4, targetReps: '8-10', notes: 'Workout 2' },
-      { exerciseId: 'dumbbell-curl', targetSets: 3, targetReps: '10-12', notes: 'Workout 2' },
-      { exerciseId: 'plank', targetSets: 3, targetReps: '30-60s', notes: 'Workout 2' },
-      
-      // Workout 3
-      { exerciseId: 'front-squat', targetSets: 4, targetReps: '8-10', notes: 'Workout 3' },
-      { exerciseId: 'incline-bench-press', targetSets: 4, targetReps: '5-8', notes: 'Workout 3' },
-      { exerciseId: 'pull-ups', targetSets: 4, targetReps: 'max', notes: 'Workout 3' },
-      { exerciseId: 'tricep-dips', targetSets: 3, targetReps: '8-12', notes: 'Workout 3' },
-      { exerciseId: 'bicycle-crunches', targetSets: 3, targetReps: '10-15', notes: 'Workout 3' },
-    ]
+    exercises: [],
+    days: [
+      {
+        id: 'day1',
+        name: 'Day 1',
+        exercises: [
+          { exerciseId: 'squat', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'bench-press', targetSets: 4, targetReps: '5-8' },
+          { exerciseId: 'pull-ups', targetSets: 4, targetReps: 'max' },
+          { exerciseId: 'tricep-pushdown', targetSets: 3, targetReps: '10-12' },
+          { exerciseId: 'crunches', targetSets: 3, targetReps: '10-15' },
+        ]
+      },
+      {
+        id: 'day2',
+        name: 'Day 2',
+        exercises: [
+          { exerciseId: 'deadlift', targetSets: 4, targetReps: '5-8' },
+          { exerciseId: 'overhead-press', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'barbell-row', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'dumbbell-curl', targetSets: 3, targetReps: '10-12' },
+          { exerciseId: 'plank', targetSets: 3, targetReps: '30-60s' },
+        ]
+      },
+      {
+        id: 'day3',
+        name: 'Day 3',
+        exercises: [
+          { exerciseId: 'front-squat', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'incline-bench-press', targetSets: 4, targetReps: '5-8' },
+          { exerciseId: 'pull-ups', targetSets: 4, targetReps: 'max' },
+          { exerciseId: 'tricep-dips', targetSets: 3, targetReps: '8-12' },
+          { exerciseId: 'bicycle-crunches', targetSets: 3, targetReps: '10-15' },
+        ]
+      },
+    ] as ProgramDay[]
   },
   {
     id: 'beginner-full-body',
@@ -54,50 +68,77 @@ const builtInPrograms: Program[] = [
     id: 'upper-lower-split',
     name: 'Upper/Lower Split',
     description: 'A balanced program alternating between upper and lower body training days.',
-    exercises: [
-      // Upper Body Day
-      { exerciseId: 'bench-press', targetSets: 4, targetReps: '8-10', notes: 'Upper Body Day' },
-      { exerciseId: 'barbell-row', targetSets: 4, targetReps: '8-10', notes: 'Upper Body Day' },
-      { exerciseId: 'overhead-press', targetSets: 3, targetReps: '8-10', notes: 'Upper Body Day' },
-      { exerciseId: 'pull-ups', targetSets: 3, targetReps: '8-10', notes: 'Upper Body Day' },
-      { exerciseId: 'dumbbell-curl', targetSets: 3, targetReps: '10-12', notes: 'Upper Body Day' },
-      { exerciseId: 'skull-crusher', targetSets: 3, targetReps: '10-12', notes: 'Upper Body Day' },
-      // Lower Body Day
-      { exerciseId: 'squat', targetSets: 4, targetReps: '8-10', notes: 'Lower Body Day' },
-      { exerciseId: 'romanian-deadlift', targetSets: 4, targetReps: '8-10', notes: 'Lower Body Day' },
-      { exerciseId: 'leg-press', targetSets: 3, targetReps: '10-12', notes: 'Lower Body Day' },
-      { exerciseId: 'leg-curl', targetSets: 3, targetReps: '10-12', notes: 'Lower Body Day' },
-      { exerciseId: 'calf-raise', targetSets: 4, targetReps: '15-20', notes: 'Lower Body Day' },
-      { exerciseId: 'plank', targetSets: 3, targetReps: '30-60s', notes: 'Lower Body Day' },
-    ]
+    exercises: [],
+    days: [
+      {
+        id: 'upper',
+        name: 'Upper Body',
+        exercises: [
+          { exerciseId: 'bench-press', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'barbell-row', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'overhead-press', targetSets: 3, targetReps: '8-10' },
+          { exerciseId: 'pull-ups', targetSets: 3, targetReps: '8-10' },
+          { exerciseId: 'dumbbell-curl', targetSets: 3, targetReps: '10-12' },
+          { exerciseId: 'skull-crusher', targetSets: 3, targetReps: '10-12' },
+        ]
+      },
+      {
+        id: 'lower',
+        name: 'Lower Body',
+        exercises: [
+          { exerciseId: 'squat', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'romanian-deadlift', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'leg-press', targetSets: 3, targetReps: '10-12' },
+          { exerciseId: 'leg-curl', targetSets: 3, targetReps: '10-12' },
+          { exerciseId: 'calf-raise', targetSets: 4, targetReps: '15-20' },
+          { exerciseId: 'plank', targetSets: 3, targetReps: '30-60s' },
+        ]
+      },
+    ] as ProgramDay[]
   },
   {
     id: 'push-pull-legs',
     name: 'Push/Pull/Legs Split',
     description: 'A classic bodybuilding split focusing on push, pull, and leg movements over 3 days.',
-    exercises: [
-      // Push Day
-      { exerciseId: 'bench-press', targetSets: 4, targetReps: '8-10', notes: 'Push Day' },
-      { exerciseId: 'incline-dumbbell-press', targetSets: 3, targetReps: '8-12', notes: 'Push Day' },
-      { exerciseId: 'overhead-press', targetSets: 3, targetReps: '8-10', notes: 'Push Day' },
-      { exerciseId: 'lateral-raise', targetSets: 3, targetReps: '10-15', notes: 'Push Day' },
-      { exerciseId: 'tricep-pushdown', targetSets: 3, targetReps: '10-15', notes: 'Push Day' },
-      { exerciseId: 'overhead-tricep-extension', targetSets: 3, targetReps: '10-15', notes: 'Push Day' },
-      // Pull Day
-      { exerciseId: 'deadlift', targetSets: 3, targetReps: '6-8', notes: 'Pull Day' },
-      { exerciseId: 'barbell-row', targetSets: 4, targetReps: '8-10', notes: 'Pull Day' },
-      { exerciseId: 'lat-pulldown', targetSets: 3, targetReps: '10-12', notes: 'Pull Day' },
-      { exerciseId: 'face-pull', targetSets: 3, targetReps: '12-15', notes: 'Pull Day' },
-      { exerciseId: 'barbell-curl', targetSets: 3, targetReps: '10-12', notes: 'Pull Day' },
-      { exerciseId: 'hammer-curl', targetSets: 3, targetReps: '10-12', notes: 'Pull Day' },
-      // Legs Day
-      { exerciseId: 'squat', targetSets: 4, targetReps: '8-10', notes: 'Legs Day' },
-      { exerciseId: 'leg-press', targetSets: 3, targetReps: '10-12', notes: 'Legs Day' },
-      { exerciseId: 'romanian-deadlift', targetSets: 3, targetReps: '8-10', notes: 'Legs Day' },
-      { exerciseId: 'leg-curl', targetSets: 3, targetReps: '10-12', notes: 'Legs Day' },
-      { exerciseId: 'calf-raise', targetSets: 4, targetReps: '15-20', notes: 'Legs Day' },
-      { exerciseId: 'plank', targetSets: 2, targetReps: '30-60s', notes: 'Legs Day' },
-    ]
+    exercises: [],
+    days: [
+      {
+        id: 'push',
+        name: 'Push',
+        exercises: [
+          { exerciseId: 'bench-press', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'incline-dumbbell-press', targetSets: 3, targetReps: '8-12' },
+          { exerciseId: 'overhead-press', targetSets: 3, targetReps: '8-10' },
+          { exerciseId: 'lateral-raise', targetSets: 3, targetReps: '10-15' },
+          { exerciseId: 'tricep-pushdown', targetSets: 3, targetReps: '10-15' },
+          { exerciseId: 'overhead-tricep-extension', targetSets: 3, targetReps: '10-15' },
+        ]
+      },
+      {
+        id: 'pull',
+        name: 'Pull',
+        exercises: [
+          { exerciseId: 'deadlift', targetSets: 3, targetReps: '6-8' },
+          { exerciseId: 'barbell-row', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'lat-pulldown', targetSets: 3, targetReps: '10-12' },
+          { exerciseId: 'face-pull', targetSets: 3, targetReps: '12-15' },
+          { exerciseId: 'barbell-curl', targetSets: 3, targetReps: '10-12' },
+          { exerciseId: 'hammer-curl', targetSets: 3, targetReps: '10-12' },
+        ]
+      },
+      {
+        id: 'legs',
+        name: 'Legs',
+        exercises: [
+          { exerciseId: 'squat', targetSets: 4, targetReps: '8-10' },
+          { exerciseId: 'leg-press', targetSets: 3, targetReps: '10-12' },
+          { exerciseId: 'romanian-deadlift', targetSets: 3, targetReps: '8-10' },
+          { exerciseId: 'leg-curl', targetSets: 3, targetReps: '10-12' },
+          { exerciseId: 'calf-raise', targetSets: 4, targetReps: '15-20' },
+          { exerciseId: 'plank', targetSets: 2, targetReps: '30-60s' },
+        ]
+      },
+    ] as ProgramDay[]
   },
   {
     id: 'strength-training',
@@ -131,7 +172,7 @@ const builtInPrograms: Program[] = [
     id: 'five-day-40plus',
     name: '5-Day Recovery-Friendly (40+)',
     description: 'A 5-day program designed for beginners over 40 with limited time. Focus on compounds, recovery, and leaving 1-2 reps in the tank. Upper/Lower style with lighter fifth day.',
-    exercises: [], // Flat list empty when using days
+    exercises: [],
     days: [
       {
         id: 'day1',
