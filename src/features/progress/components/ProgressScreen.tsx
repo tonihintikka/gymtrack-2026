@@ -14,6 +14,7 @@ const ProgressScreen: React.FC = () => {
   const [selectedExercise, setSelectedExercise] = useState('');
   const [range, setRange] = useState<TimeRange>('30D');
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [updateStatus, setUpdateStatus] = useState<string | null>(null);
   
   const { exercises, loading: exercisesLoading } = useExercises();
   const { groupedExercises, loading: historyLoading } = useExercisesWithHistory(exercises);
@@ -27,6 +28,36 @@ const ProgressScreen: React.FC = () => {
     { key: 'volume' as const, title: 'Total Volume', value: data.at(-1)?.totalVolume ? Math.round(data.at(-1)!.totalVolume) : 0, deltaPct: deltas.volume, trend: deltas.volume > 0 ? 'up' : deltas.volume < 0 ? 'down' : 'flat' },
     { key: 'reps' as const, title: 'Total Reps', value: data.at(-1)?.totalReps ? Math.round(data.at(-1)!.totalReps) : 0, deltaPct: deltas.reps, trend: deltas.reps > 0 ? 'up' : deltas.reps < 0 ? 'down' : 'flat' },
   ];
+
+  const handleCheckForUpdate = async () => {
+    setUpdateStatus('Checking...');
+    try {
+      if (!('serviceWorker' in navigator)) {
+        setUpdateStatus('Service worker not supported');
+        return;
+      }
+
+      const registration = await navigator.serviceWorker.getRegistration();
+      if (!registration) {
+        setUpdateStatus('No service worker registered');
+        return;
+      }
+
+      await registration.update();
+
+      if (registration.waiting) {
+        setUpdateStatus('Update available — reloading...');
+        setTimeout(() => window.location.reload(), 600);
+      } else {
+        setUpdateStatus('You are on the latest version');
+        setTimeout(() => setUpdateStatus(null), 3000);
+      }
+    } catch (err) {
+      console.error('Update check failed:', err);
+      setUpdateStatus('Check failed');
+      setTimeout(() => setUpdateStatus(null), 3000);
+    }
+  };
 
   return (
     <div className="progress-screen">
@@ -71,6 +102,17 @@ const ProgressScreen: React.FC = () => {
       ) : (
         <p>Select an exercise to view progress.</p>
       )}
+
+      <div className="progress-footer">
+        <button
+          type="button"
+          className="secondary check-update-btn"
+          onClick={handleCheckForUpdate}
+        >
+          Check for updates
+        </button>
+        {updateStatus && <p className="update-status">{updateStatus}</p>}
+      </div>
     </div>
   );
 };
