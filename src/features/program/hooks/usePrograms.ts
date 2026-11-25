@@ -164,7 +164,7 @@ const builtInPrograms: Program[] = [
           { exerciseId: 'lat-pulldown', targetSets: 3, targetReps: '10-12' },
           { exerciseId: 't-bar-row', targetSets: 3, targetReps: '10-12' },
           { exerciseId: 'lateral-raise', targetSets: 3, targetReps: '12-15' },
-          { exerciseId: 'face-pull', targetSets: 2, targetReps: '12-15' },
+          { exerciseId: 'machine-face-pull', targetSets: 2, targetReps: '12-15' },
         ]
       },
       {
@@ -187,7 +187,7 @@ const builtInPrograms: Program[] = [
           { exerciseId: 'dumbbell-shoulder-press', targetSets: 3, targetReps: '10-12' },
           { exerciseId: 'dumbbell-curl', targetSets: 2, targetReps: '10-12' },
           { exerciseId: 'tricep-pushdown', targetSets: 2, targetReps: '10-12' },
-          { exerciseId: 'face-pull', targetSets: 2, targetReps: '15' },
+          { exerciseId: 'machine-face-pull', targetSets: 2, targetReps: '15' },
         ]
       },
     ] as ProgramDay[]
